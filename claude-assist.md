@@ -2,6 +2,11 @@
 
 Template for using an LLM coding agent on an ESP-r model through its text files.
 
+Save a completed copy as `CLAUDE.md` in the root of the model directory. The
+agent reads a file of that name automatically, without being asked. This
+template is published under a different name so that a copy still carrying its
+placeholders cannot load itself into a session by accident.
+
 Derived from the context file used in the experiments reported in [DISSERTATION
 REFERENCE]. It is not that file. The file the experiments were given is
 reproduced verbatim in Appendix 1 of that work, and the findings reported there

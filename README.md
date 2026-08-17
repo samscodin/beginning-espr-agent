@@ -1,3 +1,5 @@
+# The guide for the context file, claude-assist.md
+
 # Using an LLM coding agent with ESP-r
 
 Two files that let you point a coding agent, such as Claude Code, at an ESP-r

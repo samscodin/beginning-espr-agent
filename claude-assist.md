@@ -7,7 +7,11 @@ agent reads a file of that name automatically, without being asked. This
 template is published under a different name so that a copy still carrying its
 placeholders cannot load itself into a session by accident.
 
-Derived from the context file used in the experiments reported in the dissertation "Building energy modelling and quality assurance in ESP-r with a general-purpose LLM agent" (University of Strathclyde, 2026). This template is not that file. The file the experiments were given is reproduced verbatim in Appendix 1 of that work, and the findings reported there attach to it and not to the template.
+Derived from the context file used in the experiments reported in the dissertation
+"Building energy modelling and quality assurance in ESP-r with a general-purpose
+LLM agent" (University of Strathclyde, 2026). This template is not that file. The
+file the experiments were given is reproduced verbatim in Appendix 1 of that work,
+and the findings reported there attach to it and not to this template.
 
 Sections marked **FILL IN** describe one model and one machine, and must be
 rewritten for another. Everything else transfers to any ESP-r model on a
@@ -16,27 +20,51 @@ comparable installation.
 ## What this is
 
 **FILL IN.** One or two lines: which model this is, what it is being used for,
-and anything a reader would otherwise assume wrongly.
+and anything a reader would otherwise assume wrongly. Delete the example lines
+below once you have replaced them.
+
+> *Example: clean single-zone ESP-r prototype used for agent edit experiments.
+> This is a working copy, and the original that ships with the engine is
+> untouched.*
 
 - Engine binaries (`prj`, `bps`, `res`): **FILL IN** the directory.
+  *Example: `/usr/local/bin`, which is what `which bps` reports.*
 - ESP-r source tree: **FILL IN** the path. The agent needs it to ground claims
-  about file formats.
+  about file formats, and cannot follow the third verification rule without it.
+  *Example: `~/ESP-r_V13.3.18_Src`*
 
 ## This model
 
-**FILL IN.** Record what the agent would otherwise have to derive, and keep it
-short enough to stay true.
+**FILL IN.** Record what the agent would otherwise have to derive for itself, and
+keep it short enough to stay true as the model changes.
 
 - Where the model was copied from, and the zone names.
+  *Example: copied from `/opt/esp-r/training/simple`. One zone, named `reception`.*
 - The config file, and how many zones.
+  *Example: `cfg/bld_simple.cfg`. One zone.*
 - Constructions and glazing, named as they appear in the files.
+  *Example: `extern_wall`, `roof_1`, `floor_1`, `doors` and `partition`, plus two
+  windows, `glz_s` facing south and `east_glz` facing east, both `dbl_glz`.*
 - The control file: setpoints, schedule, and the stated plant capacity.
-- Shading and PV. State explicitly when they are absent, not only when present.
+  *Example: `ctl/bld_simple.ctl`. Heating only, convective, ideal control. 15 °C
+  from 07h and 20 °C from 09h, maximum 3 kW. Cooling setpoint 100 °C with 0 W,
+  so no cooling occurs.*
+- Shading and PV. State these explicitly when they are absent, and not only when
+  they are present. An absence cannot be read from a file, so an agent that is
+  not told will assume one way or the other.
+  *Example: no shading (`*shad_calc none`, `*insol_calc none`). No PV.*
 - The climate file, the site latitude and longitude, and whether the two agree.
-  A disagreement between them is a fault an agent can find.
+  A disagreement between them is a fault an agent can detect, so recording that
+  they agree tells it what normal looks like on this model.
+  *Example: `clm67`, whose header latitude is 52.00, against site
+  `*latlong 51.700 -0.500`. The two agree to about 0.3 degrees.*
 - Which databases the model uses (`*stdmat`, `*stdmlc` and the rest).
-- Baseline results, if a baseline exists. Read the fourth verification rule
-  below before relying on one.
+  *Example: the standard global databases, `*stdmat material.db` and
+  `*stdmlc multicon.db`.*
+- Baseline results, if a baseline exists. Read the fourth verification rule below
+  before relying on one.
+  *Example: full year with three start-up days, heating 838.21 kWh over 1001
+  hours and no cooling. Re-derive this before comparing anything against it.*
 
 ## Verification rules
 
